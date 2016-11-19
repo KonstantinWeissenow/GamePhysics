@@ -10,7 +10,7 @@
 
 class MassPoint {
 public:
-	Vec3 m_position, m_velocity, m_force;
+	Vec3 m_position, m_velocity, m_force, m_positionTemp, m_velocityTemp, m_forceTemp;
 	bool m_isFixed;
 
 	MassPoint(Vec3 position, Vec3 velocity, bool isFixed) : m_position(position), m_velocity(velocity), m_isFixed(isFixed) {}
@@ -25,11 +25,11 @@ public:
 	Spring(std::shared_ptr<MassPoint> point0, std::shared_ptr<MassPoint> point1, float initialLength) : m_point0(point0), m_point1(point1), m_initialLength(initialLength) {}
 };
 
-class MassSpringSystemSimulator:public Simulator{
+class MassSpringSystemSimulator :public Simulator{
 public:
 	//Construtors
 	MassSpringSystemSimulator();
-	
+
 	// Functions
 	const char * getTestCasesStr();
 	void initUI(DrawingUtilitiesClass * DUC);
@@ -69,5 +69,8 @@ private:
 	// Mass points and springs
 	std::vector<std::shared_ptr<MassPoint>> m_massPoints;
 	std::vector<std::shared_ptr<Spring>> m_springs;
+
+	// Misc
+	bool m_bPrintedTestCase1;
 };
 #endif
